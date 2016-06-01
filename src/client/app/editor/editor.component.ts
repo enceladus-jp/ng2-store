@@ -24,13 +24,15 @@ export class EditorComponent {
     
     constructor(private _store : Store<any>){
         this.editor = this._store.select('editor') ;
+        console.log("Initial state of editor store:" ) ;
         console.log(this.editor) ;
     }
     
     handleEditorText(text : any) {
-        console.log(text.present) ;
+        console.log("Current value of textarea.component " + text.present) ;
         this._store.dispatch({type: "MORPH", payload : text}) ;
-        console.log(this._store) ;
+        console.log("Value of store after updating with MORPH:") ;
+        console.log(this._store);
     }
     
     undoType(text : any){
