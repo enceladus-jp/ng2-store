@@ -28,11 +28,13 @@ export class EditorComponent {
         console.log(this.editor) ;
     }
     
-    handleEditorText(text : any) {
-        console.log("Current value of textarea.component " + text.present) ;
-        this._store.dispatch({type: "MORPH", payload : text}) ;
-        console.log("Value of store after updating with MORPH:") ;
-        console.log(this._store);
+    handleEditorText(keyev : any) {
+        // console.log("Current value of textarea.component " + text.present) ;
+        if (keyev.key.length === 1) {
+            this._store.dispatch({type: "MORPH", payload : keyev.key}) ;
+            console.log("Value of store after updating with MORPH:") ;
+            console.log(this._store);
+        }
     }
     
     undoType(text : any){

@@ -6,8 +6,8 @@ import { Reducer, Action } from '@ngrx/store';
 const initialState : any = {
     // previous state array; useful for reverting back with undo
     past : [],
-    // current state array; textarea element mainly deals with this
-    present : [],
+    // current state string; textarea element mainly deals with this
+    present : "" ,
     // future state array; useful for redo button
     future : []
 }
@@ -26,7 +26,7 @@ export const editorReducer : Reducer<any> =
         switch(action.type) {
             // Gets called when any keydown event occurs in text area
             case "MORPH" :
-            const newPresent = [...present, action]
+            const newPresent = present + action.payload ;
                 if (present === newPresent) {
                     return state
                 }
