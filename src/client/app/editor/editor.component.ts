@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store' ;
 
 import { EditorService } from './editor.service' ;
 import { TextareaComponent } from './textarea.component' ;
+import { NumEditComponent } from './numedit.component' ;
 
 @Component({
     selector : 'editor',
@@ -15,8 +16,11 @@ import { TextareaComponent } from './textarea.component' ;
         <editor-textarea [editor]="editor | async"
             (editorText)="handleEditorText($event)"></editor-textarea>
     </div>
+    <div>
+        <numedit [editor]="editor | async"></numedit>
+    </div>
     `,
-    directives : [TextareaComponent]
+    directives : [TextareaComponent, NumEditComponent]
 })
 
 export class EditorComponent {
@@ -30,11 +34,11 @@ export class EditorComponent {
     
     handleEditorText(keyev : any) {
         // console.log("Current value of textarea.component " + text.present) ;
-        if (keyev.key.length === 1) {
-            this._store.dispatch({type: "MORPH", payload : keyev.key}) ;
+        // if (keyev.key.length === 1) {
+            this._store.dispatch({type: "MORPH", payload : String.fromCharCode(keyev.keyCode)}) ;
             console.log("Value of store after updating with MORPH:") ;
             console.log(this._store);
-        }
+        // }
     }
     
     undoType(text : any){

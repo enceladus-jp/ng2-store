@@ -4,7 +4,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core' ;
     selector : 'editor-textarea',
     template : `
     <textarea placeholder="Type here..." 
-        (keydown)="editorText.emit($event)"
+        (keypress)="editorText.emit($event)"
         [ngModel]="editor.present" autofocus></textarea>
     `
 })
