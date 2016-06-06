@@ -9,8 +9,8 @@ import { NumEditComponent } from './numedit.component' ;
     selector : 'editor',
     template : `
     <div>
-        <button (click)="undoType(editor)">Undo</button>
-        <button (click)="redoType(editor)">Redo</button>
+        <button [disabled]="timetravel('UNDO')" (click)="undoType(editor)">Undo</button>
+        <button [disabled]="timetravel('REDO')" (click)="redoType(editor)">Redo</button>
     </div>
     <div>
         <editor-textarea [editor]="editor | async"
@@ -33,12 +33,9 @@ export class EditorComponent {
     }
     
     handleEditorText(keyev : any) {
-        // console.log("Current value of textarea.component " + text.present) ;
-        // if (keyev.key.length === 1) {
-            this._store.dispatch({type: "MORPH", payload : String.fromCharCode(keyev.keyCode)}) ;
-            console.log("Value of store after updating with MORPH:") ;
-            console.log(this._store);
-        // }
+        this._store.dispatch({type: "MORPH", payload : String.fromCharCode(keyev.keyCode)}) ;
+        console.log("Value of store after updating with MORPH:") ;
+        console.log(this._store);
     }
     
     undoType(text : any){
@@ -47,5 +44,14 @@ export class EditorComponent {
     
     redoType(text : any){
         this._store.dispatch({type: "REDO", payload : text}) ;
+    }
+    
+    timetravel(doable : string){
+        switch(doable) {
+            case 'UNDO' :
+                return this._store.value.editor.past.length === 0;
+            case 'REDO' :
+                return this._store.value.editor.future.length === 0;
+        }
     }
 }
