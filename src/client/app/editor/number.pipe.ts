@@ -6,6 +6,6 @@ import {Pipe, PipeTransform} from '@angular/core' ;
 })
 export class NumberExtractPipe implements PipeTransform {
     transform(text : String){
-        return (text.match(/\d+/)) ;
+        return text.replace(/\D/g, "") ;
     }
 }
