@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store' ;
 
 import { EditorService } from './editor.service' ;
 import { TextareaComponent } from './textarea.component' ;
-import { NumEditComponent } from './numedit.component' ;
+// import { NumEditComponent } from './numedit.component' ;
 
 @Component({
     selector : 'editor',
@@ -16,11 +16,8 @@ import { NumEditComponent } from './numedit.component' ;
         <editor-textarea [editor]="editor | async"
             (editorText)="handleEditorText($event)"></editor-textarea>
     </div>
-    <div>
-        <numedit [editor]="editor | async"></numedit>
-    </div>
     `,
-    directives : [TextareaComponent, NumEditComponent]
+    directives : [TextareaComponent]
 })
 
 export class EditorComponent {
